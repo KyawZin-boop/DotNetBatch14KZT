@@ -13,6 +13,7 @@ connectionStringBuilder.TrustServerCertificate = true;
 SqlConnection con = new SqlConnection(connectionStringBuilder.ConnectionString);
 
 con.Open();
+Console.WriteLine("open");
 
 String query = "Select * from tbl_blog";
 SqlCommand cmd = new SqlCommand(query, con);
