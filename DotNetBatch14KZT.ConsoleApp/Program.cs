@@ -2,30 +2,11 @@
 using Microsoft.Data.SqlClient;
 using System;
 using System.Data;
+using DotNetBatch14KZT.ConsoleApp.AdoDotNetExamples;
 
-SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder();
-connectionStringBuilder.DataSource = "DESKTOP-C0JBC3O\\MSSQLSERVER2022"; //server name
-connectionStringBuilder.InitialCatalog = "test_db"; //database name
-connectionStringBuilder.UserID = "sa";
-connectionStringBuilder.Password = "Kyawzin@123";
-connectionStringBuilder.TrustServerCertificate = true;
-
-SqlConnection con = new SqlConnection(connectionStringBuilder.ConnectionString);
-
-con.Open();
-Console.WriteLine("open");
-
-String query = "Select * from tbl_blog";
-SqlCommand cmd = new SqlCommand(query, con);
-SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-DataTable dt = new DataTable();
-adapter.Fill(dt);
-
-con.Close();
-
-foreach(DataRow dr in dt.Rows)
-{
-    Console.WriteLine(dr["blog_title"]);
-    Console.WriteLine(dr["blog_author"]);
-    Console.WriteLine(dr["blog_content"]);
-}
+AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
+adoDotNetExample.Read();
+//adoDotNetExample.Edit("EEDC717B-0A30-498C-B5EC-F2EF94CAE11E");
+//adoDotNetExample.Update("EEDC717B-0A30-498C-B5EC-F2EF94CAE11E");
+//adoDotNetExample.Create("insertTitle", "insertAuthor", "insertContent");
+//adoDotNetExample.Delete("133635EE-5A58-4C05-A1CD-EDE726C91922");
