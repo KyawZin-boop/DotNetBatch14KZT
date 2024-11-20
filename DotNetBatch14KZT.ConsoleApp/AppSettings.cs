@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DotNetBatch14KZT.ConsoleApp2
+namespace DotNetBatch14KZT.ConsoleApp
 {
-    public static class AppSettings
+    public class AppSettings
     {
         public static SqlConnectionStringBuilder ConnectionStringBuilder { get; } = new SqlConnectionStringBuilder()
         {

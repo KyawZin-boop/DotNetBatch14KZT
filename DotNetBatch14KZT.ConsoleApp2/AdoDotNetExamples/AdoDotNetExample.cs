@@ -66,4 +66,60 @@ public class AdoDotNetExample
         Console.WriteLine("author = " + row["blog_author"]);
         Console.WriteLine("content = " + row["blog_content"]);
     }
+
+    public void Create(string title, string author, string content)
+    {
+        string query = $@"INSERT INTO [dbo].[tbl_blog]
+                                   ([blog_title]
+                                   ,[blog_author]
+                                   ,[blog_content])
+                             VALUES
+                                   ('{title}'
+                                   ,'{author}'
+                                   ,'{content}')";
+
+        SqlConnection con = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+        con.Open();
+
+        SqlCommand cmd = new SqlCommand(query, con);
+        int result = cmd.ExecuteNonQuery();
+
+        con.Close() ;
+
+        string message = result > 0 ? "Create Success!" : "Fail to Create!";
+        Console.WriteLine(message);
+    }
+
+    public void Update(string id)
+    {
+        SqlConnection con = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+        con.Open();
+
+        SqlCommand cmd = new SqlCommand(@$"UPDATE [dbo].[tbl_blog]
+                                           SET [blog_title] = 'updateTitle'
+                                              ,[blog_author] = 'updateAuthor'
+                                              ,[blog_content] = 'updateContent'
+                                         WHERE blog_id = '{id}'", con);
+        int result = cmd.ExecuteNonQuery();
+        
+        con.Close() ;
+
+        string message = result > 0 ? "Update Success!" : "Fail to Update!";
+        Console.WriteLine(message);
+    }
+
+    public void Delete(string id)
+    {
+        SqlConnection con = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+        con.Open();
+
+        SqlCommand cmd = new SqlCommand($@"DELETE FROM [dbo].[tbl_blog]
+                                                WHERE blog_id = '{id}'", con);
+        int result = cmd.ExecuteNonQuery();
+
+        con.Close() ;
+
+        string message = result > 0 ? "Delete Success!" : "Fail to Delete!";
+        Console.WriteLine(message);
+    }
 }
